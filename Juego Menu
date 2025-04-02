@@ -1,0 +1,115 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool menu(bool flag){
+    int eleccion_menu = 0;
+    cout << "Continuar? 1.Si 2.No" << endl;
+        cin >> eleccion_menu;
+        switch (eleccion_menu) {
+            case 1:
+                cout << "Reiniciando el tablero..." << endl;
+                break;
+            case 2:
+                cout << "Saliendo...";
+                flag = false;
+                break;
+            default:
+                cout << "Opcion no valida, por favor elija 1 o 2." << endl;
+        }
+        return flag;
+}
+void codigo_principal(string objeto_1 ,string objeto_2 ,string objeto_3 ,string objeto_4 ,
+    string objeto_5 ,string objeto_6 ,string objeto_7 ,string objeto_8 ,
+    string objeto_9 ,string objeto_10 ,string objeto_11 ,string objeto_12 ,
+    string objeto_13 ,string objeto_14 ,string objeto_15){
+    for (int i=0;i<4;i++){
+    int eleccion_objeto = 0;
+    cout << "Turno del jugador " << i+1 << endl;
+    cout <<"  "<< objeto_1 << objeto_2 << objeto_3 <<"  "<< endl;
+    cout <<" "<<objeto_4<< objeto_5 << objeto_6 << objeto_7 << objeto_8 <<" "<< endl;
+    cout << objeto_9 << objeto_10 << objeto_11 << objeto_12 << objeto_13 << objeto_14 << objeto_15 << endl;
+    cout << "Elija un objeto para quitar: " << endl;
+    cin >> eleccion_objeto;
+    switch (eleccion_objeto) {
+        case 1:
+            cout << "Has elegido el objeto 1" << endl;
+            objeto_1 = " ";
+            break;
+        case 2:
+            cout << "Has elegido el objeto 2" << endl;
+            objeto_2 = " ";
+            break;
+        case 3:
+            cout << "Has elegido el objeto 3" << endl;
+            objeto_3 = " ";
+            break;
+        case 4:
+            cout << "Has elegido el objeto 4" << endl;
+            objeto_4 = " ";
+            break;
+        case 5:
+            cout << "Has elegido el objeto 5" << endl;
+            objeto_5 = " ";
+            break;
+        case 6:
+            cout << "Has elegido el objeto 6" << endl;
+            objeto_6 = " ";
+            break;
+        case 7:
+            cout << "Has elegido el objeto 7" << endl;
+            objeto_7 = " ";
+            break;
+        case 8:
+            cout << "Has elegido el objeto 8" << endl;
+            objeto_8 = " ";
+            break;
+        case 9:
+            cout << "Has elegido el objeto 9" << endl;
+            objeto_9 = " ";
+            break;
+        case 10:
+            cout << "Has elegido el objeto 10" << endl;
+            objeto_10 = " ";
+            break;
+        case 11:
+            cout << "Has elegido el objeto 11" << endl;
+            objeto_11 = " ";
+            break;
+        case 12:
+            cout << "Has elegido el objeto 12" << endl;
+            objeto_12 = " ";
+            break; 
+        case 13:
+            cout << "Has elegido el objeto 13" << endl; 
+            objeto_13 = " ";
+            break; 
+        case 14:
+            cout<< "Has elegido el objeto 14" << endl;
+            objeto_14 = " ";
+            break; 
+        case 15:
+            cout<< "Has elegido el objeto 15" << endl;
+            objeto_15 = " ";
+            break; 
+        default:
+            cout<< "Opcion no valida, elija alguno de los objetos en pantalla [1 y 15]" << endl;
+    }
+}
+
+}
+int main() {
+    bool flag = true,controlador_menu;
+    int jugador_1=0,jugador_2=0;
+    string objeto_1 = "[1]", objeto_2 = "[2]", objeto_3 = "[3]", objeto_4 = "[4]";
+    string objeto_5 = "[5]", objeto_6 = "[6]", objeto_7 = "[7]", objeto_8 = "[8]";
+    string objeto_9 = "[9]", objeto_10 = "[10]", objeto_11 = "[11]", objeto_12 = "[12]";
+    string objeto_13 = "[13]", objeto_14 = "[14]", objeto_15 = "[15]";
+    cout << "Bienvenido a ``Jenga 1972``" << endl;
+    do {
+        codigo_principal(objeto_1,objeto_2,objeto_3,objeto_4,objeto_5,objeto_6,objeto_7,objeto_8,
+            objeto_9,objeto_10,objeto_11,objeto_12,objeto_13,objeto_14,objeto_15);
+        controlador_menu=menu(flag);
+    }while (controlador_menu==true);
+    return 0;
+}
