@@ -1,0 +1,245 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// verifica el ganador
+int controlador_ganador(int turno, int &jugador1, int &jugador2, 
+    string objeto_1, string objeto_2, string objeto_3, string objeto_4,
+    string objeto_5, string objeto_6, string objeto_7, string objeto_8,
+    string objeto_9, string objeto_10, string objeto_11, string objeto_12,
+    string objeto_13, string objeto_14, string objeto_15) {
+    
+    int suma_objetos = 0;
+    suma_objetos += (objeto_1 != "   ");
+    suma_objetos += (objeto_2 != "   ");
+    suma_objetos += (objeto_3 != "   ");
+    suma_objetos += (objeto_4 != "   ");
+    suma_objetos += (objeto_5 != "   ");
+    suma_objetos += (objeto_6 != "   ");
+    suma_objetos += (objeto_7 != "   ");
+    suma_objetos += (objeto_8 != "   ");
+    suma_objetos += (objeto_9 != "   ");
+    suma_objetos += (objeto_10 != "   ");
+    suma_objetos += (objeto_11 != "   ");
+    suma_objetos += (objeto_12 != "   ");
+    suma_objetos += (objeto_13 != "   ");
+    suma_objetos += (objeto_14 != "   ");
+    suma_objetos += (objeto_15 != "   ");
+
+    if (suma_objetos == 1) {
+        cout << "\nEl jugador " << turno << " ha perdido!" << endl;
+        if (turno == 1)
+            jugador2++;
+        else
+            jugador1++;
+    }
+    return suma_objetos;
+}
+
+// menu
+bool menu() {
+    int eleccion_menu = 0;
+    cout << "\nContinuar? 1. Si  2. No" << endl;
+    cin >> eleccion_menu;
+    if (eleccion_menu == 1) {
+        cout << "Reiniciando el tablero..." << endl << endl;
+        return true;
+    } else {
+        cout << "Saliendo..." << endl;
+        return false;
+    }
+}
+
+// Muestra el tablero
+void mostrarFilas(string objeto_1, string objeto_2, string objeto_3,
+                  string objeto_4, string objeto_5, string objeto_6,
+                  string objeto_7, string objeto_8, string objeto_9,
+                  string objeto_10, string objeto_11, string objeto_12,
+                  string objeto_13, string objeto_14, string objeto_15) {
+    cout << "\nObjetos disponibles:\n" << endl;
+    cout << "Fila 1:      " << objeto_1 << " " << objeto_2 << " " << objeto_3 << endl;
+    cout << "Fila 2:   " << objeto_4 << " " << objeto_5 << " " << objeto_6 << " " 
+         << objeto_7 << " " << objeto_8 << endl;
+    cout << "Fila 3: " << objeto_9 << " " << objeto_10 << " " << objeto_11 << " " 
+         << objeto_12 << " " << objeto_13 << " " << objeto_14 << " " << objeto_15 << endl << endl;
+}
+
+// Valida la cantidad de objetos que se pueden retirar según la fila
+bool validarCantidadObjetos(int fila, int cantidad) {
+    if ((fila == 1 && cantidad >= 1 && cantidad <= 3) ||
+        (fila == 2 && cantidad >= 1 && cantidad <= 5) ||
+        (fila == 3 && cantidad >= 1 && cantidad <= 7))
+        return true;
+    else {
+        cout << "Cantidad no valida para esa fila.\n";
+        return false;
+    }
+}
+
+// Elimina los objetos
+void eliminarObjeto(int fila, int eleccion, string &objeto_1, string &objeto_2, string &objeto_3,
+                    string &objeto_4, string &objeto_5, string &objeto_6, string &objeto_7,
+                    string &objeto_8, string &objeto_9, string &objeto_10, string &objeto_11,
+                    string &objeto_12, string &objeto_13, string &objeto_14, string &objeto_15) {
+    if (fila == 1) {
+        if (eleccion == 1) objeto_1 = "   ";
+        else if (eleccion == 2) objeto_2 = "   ";
+        else if (eleccion == 3) objeto_3 = "   ";
+    } else if (fila == 2) {
+        if (eleccion == 4) objeto_4 = "   ";
+        else if (eleccion == 5) objeto_5 = "   ";
+        else if (eleccion == 6) objeto_6 = "   ";
+        else if (eleccion == 7) objeto_7 = "   ";
+        else if (eleccion == 8) objeto_8 = "   ";
+    } else if (fila == 3) {
+        if (eleccion == 9) objeto_9 = "   ";
+        else if (eleccion == 10) objeto_10 = "   ";
+        else if (eleccion == 11) objeto_11 = "   ";
+        else if (eleccion == 12) objeto_12 = "   ";
+        else if (eleccion == 13) objeto_13 = "   ";
+        else if (eleccion == 14) objeto_14 = "   ";
+        else if (eleccion == 15) objeto_15 = "   ";
+    }
+}
+
+// verifica si el objeto seleccionado está disponible.
+bool objetoDisponible(int fila, int eleccion,
+                      string objeto_1, string objeto_2, string objeto_3,
+                      string objeto_4, string objeto_5, string objeto_6,
+                      string objeto_7, string objeto_8, string objeto_9,
+                      string objeto_10, string objeto_11, string objeto_12,
+                      string objeto_13, string objeto_14, string objeto_15) {
+    if (fila == 1) {
+        if (eleccion == 1) return objeto_1 != "   ";
+        else if (eleccion == 2) return objeto_2 != "   ";
+        else if (eleccion == 3) return objeto_3 != "   ";
+    } else if (fila == 2) {
+        if (eleccion == 4) return objeto_4 != "   ";
+        else if (eleccion == 5) return objeto_5 != "   ";
+        else if (eleccion == 6) return objeto_6 != "   ";
+        else if (eleccion == 7) return objeto_7 != "   ";
+        else if (eleccion == 8) return objeto_8 != "   ";
+    } else if (fila == 3) {
+        if (eleccion == 9) return objeto_9 != "   ";
+        else if (eleccion == 10) return objeto_10 != "   ";
+        else if (eleccion == 11) return objeto_11 != "   ";
+        else if (eleccion == 12) return objeto_12 != "   ";
+        else if (eleccion == 13) return objeto_13 != "   ";
+        else if (eleccion == 14) return objeto_14 != "   ";
+        else if (eleccion == 15) return objeto_15 != "   ";
+    }
+    return false;
+}
+
+// Función principal del juego 
+void codigo_principal(int &turno, int &jugador1, int &jugador2) {
+    string objeto_1 = "[1]", objeto_2 = "[2]", objeto_3 = "[3]", objeto_4 = "[4]";
+    string objeto_5 = "[5]", objeto_6 = "[6]", objeto_7 = "[7]", objeto_8 = "[8]";
+    string objeto_9 = "[9]", objeto_10 = "[10]", objeto_11 = "[11]", objeto_12 = "[12]";
+    string objeto_13 = "[13]", objeto_14 = "[14]", objeto_15 = "[15]";
+
+    bool final_juego = true;
+
+    while (final_juego) {
+        int fila = 0, cantidad = 0, eleccion = 0;
+
+        cout << "\nTurno del jugador " << turno << endl;
+        mostrarFilas(objeto_1, objeto_2, objeto_3, objeto_4, objeto_5, objeto_6,
+                     objeto_7, objeto_8, objeto_9, objeto_10, objeto_11, objeto_12,
+                     objeto_13, objeto_14, objeto_15);
+        cout << "Seleccione una fila (1, 2 o 3): ";
+        cin >> fila;
+        if (fila < 1 || fila > 3) {
+            cout << "Fila invalida.\n";
+            continue;
+        }
+        //verifica si hay objetos en la fila seleccionada
+        if (fila == 1) {
+            if (objeto_1 == "   " && objeto_2 == "   " && objeto_3 == "   ") {
+                cout << "La fila seleccionada esta vacia. Por favor, seleccione otra fila.\n";
+                continue;
+            }
+        } else if (fila == 2) {
+            if (objeto_4 == "   " && objeto_5 == "   " && objeto_6 == "   " &&
+                objeto_7 == "   " && objeto_8 == "   ") {
+                cout << "La fila seleccionada esta vacia. Por favor, seleccione otra fila.\n";
+                continue;
+            }
+        } else if (fila == 3) {
+            if (objeto_9 == "   " && objeto_10 == "   " && objeto_11 == "   " &&
+                objeto_12 == "   " && objeto_13 == "   " && objeto_14 == "   " &&
+                objeto_15 == "   ") {
+                cout << "La fila seleccionada esta vacia. Por favor, seleccione otra fila.\n";
+                continue;
+            }
+        }
+        cout << "Cuantos objetos quiere retirar?: ";
+        cin >> cantidad;
+        if (!validarCantidadObjetos(fila, cantidad))
+            continue;
+
+        // Para la cantidad de objetos a retirar
+        for (int i = 0; i < cantidad; i++) {
+            mostrarFilas(objeto_1, objeto_2, objeto_3, objeto_4, objeto_5, objeto_6,
+                         objeto_7, objeto_8, objeto_9, objeto_10, objeto_11, objeto_12,
+                         objeto_13, objeto_14, objeto_15);
+
+            cout << "Elija el numero del objeto a retirar: ";
+            cin >> eleccion;
+
+            // Verifica que el número ingresado corresponda a la fila seleccionada
+            if ((fila == 1 && (eleccion < 1 || eleccion > 3)) ||
+                (fila == 2 && (eleccion < 4 || eleccion > 8)) ||
+                (fila == 3 && (eleccion < 9 || eleccion > 15))) {
+                cout << "Objeto no valido para la fila seleccionada.\n";
+                i--; // Reintenta esta ronda
+                continue;
+            }
+
+            // Verifica que el objeto seleccionado aún esté disponible
+            if (!objetoDisponible(fila, eleccion, objeto_1, objeto_2, objeto_3, objeto_4,
+                                  objeto_5, objeto_6, objeto_7, objeto_8, objeto_9,
+                                  objeto_10, objeto_11, objeto_12, objeto_13, objeto_14, objeto_15)) {
+                cout << "El objeto ya ha sido retirado. Por favor, elija otro." << endl;
+                i--;
+                continue;
+            }
+
+            // Elimina el objeto seleccionado
+            eliminarObjeto(fila, eleccion, objeto_1, objeto_2, objeto_3, objeto_4,
+                           objeto_5, objeto_6, objeto_7, objeto_8, objeto_9,
+                           objeto_10, objeto_11, objeto_12, objeto_13, objeto_14, objeto_15);
+
+            // Revisa si con este movimiento queda un solo objeto:
+            int suma = controlador_ganador(turno, jugador1, jugador2, objeto_1, objeto_2, objeto_3, objeto_4,
+                                           objeto_5, objeto_6, objeto_7, objeto_8,
+                                           objeto_9, objeto_10, objeto_11, objeto_12,
+                                           objeto_13, objeto_14, objeto_15);
+            if (suma == 1) {
+                final_juego = false;
+                break;
+            }
+        }
+        // Cambio de turno
+        turno = (turno == 1) ? 2 : 1;
+    }
+}
+
+int main() {
+    cout <<"________________________________________\n"<<endl;
+    cout <<"|      Bienvenido a ``Jenga 1972``     |\n";
+    cout <<"________________________________________\n";
+    bool flag = true;
+    int turno = 1;
+    int jugador1 = 0, jugador2 = 0;
+
+    do {
+        codigo_principal(turno, jugador1, jugador2);
+        cout << "\nPuntuacion:" << endl;
+        cout << "Jugador 1: " << jugador1 << endl;
+        cout << "Jugador 2: " << jugador2 << endl;
+        flag = menu();
+    } while (flag);
+
+    return 0;
+}
