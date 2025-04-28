@@ -156,7 +156,7 @@ int main() {
         string objeto_13 = "[13]", objeto_14 = "[14]", objeto_15 = "[15]";
 
         codigo_principal(turno, objeto_1, objeto_2, objeto_3, objeto_4, objeto_5, objeto_6, objeto_7, objeto_8,
-                         objeto_9, objeto_10, objeto_11, objeto_12, objeto_13, objeto_14, objeto_15);
+                        objeto_9, objeto_10, objeto_11, objeto_12, objeto_13, objeto_14, objeto_15);
         flag = menu(flag);
         if (!flag) break;
     } while (true);
