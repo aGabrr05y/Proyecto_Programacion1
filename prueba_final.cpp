@@ -3,163 +3,166 @@
 using namespace std;
 
 bool menu(bool flag) {
-    int eleccion_menu;
-    cout << "Continuar? 1.Si 2.No: ";
-    cin >> eleccion_menu;
-    switch (eleccion_menu) {
-        case 1: {
-            cout << "Reiniciando el tablero..." << endl
-                 << "..................." << endl
-                 << ".." << endl;
-            break;
-        }
-        case 2: {
-            cout << "Saliendo..." << endl
-                 << "..................." << endl
-                 << ".." << endl;
-            flag = false;
-            break;
-        }
-        default: {
-            cout << "Opcion no valida, por favor elija 1 o 2." << endl;
-            break;
-        }
-    }
-    return flag;
+	int eleccion_menu = 0;
+	cout << "Continuar? 1. Si  2. No" << endl;
+	cin >> eleccion_menu;
+	switch (eleccion_menu) {
+	case 1:
+		cout << "Reiniciando el tablero..." << endl;
+		break;
+	case 2:
+		cout << "Saliendo...";
+		flag = false;
+		break;
+	default:
+		cout << "Opcion no valida, por favor elija 1 o 2." << endl;
+	}
+	return flag;
 }
 
-void codigo_principal(
-    int& turno, string objeto_1, string objeto_2, string objeto_3, string objeto_4,
-    string objeto_5, string objeto_6, string objeto_7, string objeto_8,
-    string objeto_9, string objeto_10, string objeto_11, string objeto_12,
-    string objeto_13, string objeto_14, string objeto_15
-) {
-    string jugador_1, jugador_2;
-    int punteo_jugador_1 = 0, punteo_jugador_2 = 0;
-    bool partida_terminada = false;
-
-    while (!partida_terminada) {
-        int eleccion_objeto = 0, cantidad_objetos = 0, fila = 0;
-        int disponibles_fila1 = (objeto_1 != "   ") + (objeto_2 != "   ") + (objeto_3 != "   ");
-        int disponibles_fila2 = (objeto_4 != "   ") + (objeto_5 != "   ") + (objeto_6 != "   ") + (objeto_7 != "   ") + (objeto_8 != "   ");
-        int disponibles_fila3 = (objeto_9 != "   ") + (objeto_10 != "   ") + (objeto_11 != "   ") + (objeto_12 != "   ") + (objeto_13 != "   ") + (objeto_14 != "   ") + (objeto_15 != "   ");
-
-        int total_objetos = disponibles_fila1 + disponibles_fila2 + disponibles_fila3;
-
-        if (jugador_1.empty() && jugador_2.empty()) {
-            cout << "Ingrese nombre para jugador 1: ";
-            cin >> jugador_1;
-            cout << "Ingrese nombre para jugador 2: ";
-            cin >> jugador_2;
-        } else {
-            cout << "Turno de " << (turno == 1 ? jugador_1 : jugador_2) << endl;
-        }
-
-        cout << endl << "Objetos disponibles:" << endl << endl;
-        cout << "         " << objeto_1 << objeto_2 << objeto_3 << endl;
-        cout << "      " << objeto_4 << objeto_5 << objeto_6 << objeto_7 << objeto_8 << endl;
-        cout << objeto_9 << objeto_10 << objeto_11 << objeto_12 << objeto_13 << objeto_14 << objeto_15 << endl << endl;
-
-        bool seleccion_valida = false;
-        while (!seleccion_valida) {
-            cout << "De que fila quieres quitar objetos? (1: Primera, 2: Segunda, 3: Tercera): ";
-            cin >> fila;
-
-            int disponibles = 0;
-            if (fila == 1) disponibles = disponibles_fila1;
-            else if (fila == 2) disponibles = disponibles_fila2;
-            else if (fila == 3) disponibles = disponibles_fila3;
-
-            if (disponibles > 0) {
-                cout << "Cuantos objetos retirara (disponible " << disponibles << ")? ";
-                cin >> cantidad_objetos;
-                if (cantidad_objetos > 0 && cantidad_objetos <= disponibles) {
-                    seleccion_valida = true;
-                }
-            }
-
-            if (!seleccion_valida) {
-                cout << "Cantidad no valida o fila incorrecta. Intente de nuevo." << endl;
-            }
-        }
-
-        for (int j = 0; j < cantidad_objetos; j++) {
-            bool objeto_valido = false;
-            while (!objeto_valido) {
-                cout << "Elija un objeto para quitar de la fila " << fila << ": ";
-                cin >> eleccion_objeto;
-                if (fila == 1) {
-                    if (eleccion_objeto == 1 && objeto_1 != "   ") { objeto_1 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 2 && objeto_2 != "   ") { objeto_2 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 3 && objeto_3 != "   ") { objeto_3 = "   "; objeto_valido = true; }
-                } else if (fila == 2) {
-                    if (eleccion_objeto == 4 && objeto_4 != "   ") { objeto_4 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 5 && objeto_5 != "   ") { objeto_5 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 6 && objeto_6 != "   ") { objeto_6 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 7 && objeto_7 != "   ") { objeto_7 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 8 && objeto_8 != "   ") { objeto_8 = "   "; objeto_valido = true; }
-                } else if (fila == 3) {
-                    if (eleccion_objeto == 9 && objeto_9 != "   ") { objeto_9 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 10 && objeto_10 != "   ") { objeto_10 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 11 && objeto_11 != "   ") { objeto_11 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 12 && objeto_12 != "   ") { objeto_12 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 13 && objeto_13 != "   ") { objeto_13 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 14 && objeto_14 != "   ") { objeto_14 = "   "; objeto_valido = true; }
-                    else if (eleccion_objeto == 15 && objeto_15 != "   ") { objeto_15 = "   "; objeto_valido = true; }
-                }
-                if (!objeto_valido) {
-                    cout << "Objeto no disponible. Intente de nuevo." << endl;
-                }
-            }
-        }
-
-        disponibles_fila1 = (objeto_1 != "   ") + (objeto_2 != "   ") + (objeto_3 != "   ");
-        disponibles_fila2 = (objeto_4 != "   ") + (objeto_5 != "   ") + (objeto_6 != "   ") + (objeto_7 != "   ") + (objeto_8 != "   ");
-        disponibles_fila3 = (objeto_9 != "   ") + (objeto_10 != "   ") + (objeto_11 != "   ") + (objeto_12 != "   ") + (objeto_13 != "   ") + (objeto_14 != "   ") + (objeto_15 != "   ");
-        total_objetos = disponibles_fila1 + disponibles_fila2 + disponibles_fila3;
-
-        if (total_objetos == 1) {
-            if (turno == 1) {
-                cout << "Gana " << jugador_2 << endl;
-                punteo_jugador_2++;
-            } else {
-                cout << "Gana " << jugador_1 <<endl;
-                punteo_jugador_1++;
-            }
-            cout << endl << "Marcador:" << endl;
-            cout << jugador_1 << ": " << punteo_jugador_1 << endl;
-            cout << jugador_2 << ": " << punteo_jugador_2 << endl;
-            partida_terminada = true;
-            break;
-        }
-
-        turno = (turno == 1) ? 2 : 1;
-    }
+bool hayObjetos(string objeto_1, string objeto_2, string objeto_3, string objeto_4,
+				string objeto_5, string objeto_6, string objeto_7, string objeto_8,
+				string objeto_9, string objeto_10, string objeto_11, string objeto_12,
+				string objeto_13, string objeto_14, string objeto_15) {
+	return objeto_1 != "   " || objeto_2 != "   " || objeto_3 != "   " ||
+		objeto_4 != "   " || objeto_5 != "   " || objeto_6 != "   " || objeto_7 != "   " || objeto_8 != "   " ||
+		objeto_9 != "   " || objeto_10 != "   " || objeto_11 != "   " || objeto_12 != "   " ||
+		objeto_13 != "   " || objeto_14 != "   " || objeto_15 != "   ";
 }
-
-int main() {
-    bool flag = true;
-    int turno = 1;
-
-    cout << "|-------------------|" << endl;
-    cout << "|    BIENVENIDOS    |" << endl;
-    cout << "|     AL JUEGO      |" << endl;
-    cout << "|___________________|" << endl;
-    cout << "(/__/)" << " ||" << endl;
-    cout << "(0v0)_" << "_||" << endl;
-    cout << "/   /" << endl;
-
-    do {
-        string objeto_1 = "[1]", objeto_2 = "[2]", objeto_3 = "[3]", objeto_4 = "[4]";
-        string objeto_5 = "[5]", objeto_6 = "[6]", objeto_7 = "[7]", objeto_8 = "[8]";
-        string objeto_9 = "[9]", objeto_10 = "[10]", objeto_11 = "[11]", objeto_12 = "[12]";
-        string objeto_13 = "[13]", objeto_14 = "[14]", objeto_15 = "[15]";
-
-        codigo_principal(turno, objeto_1, objeto_2, objeto_3, objeto_4, objeto_5, objeto_6, objeto_7, objeto_8,
-                        objeto_9, objeto_10, objeto_11, objeto_12, objeto_13, objeto_14, objeto_15);
-        flag = menu(flag);
-        if (!flag) break;
-    } while (true);
-
-    return 0;
-}
+				
+				bool codigo_principal(
+									int& turno, int& puntaje_1, int& puntaje_2,
+									string& objeto_1, string& objeto_2, string& objeto_3, string& objeto_4,
+									string& objeto_5, string& objeto_6, string& objeto_7, string& objeto_8,
+									string& objeto_9, string& objeto_10, string& objeto_11, string& objeto_12,
+									string& objeto_13, string& objeto_14, string& objeto_15)
+				{
+					string jugador_1 = "", jugador_2 = "";
+					
+					for (int i = 0; i < 4; i++) {
+						int eleccion_objeto = 0, cantidad_objetos = 0;
+						int fila = 0;
+						
+						int disponibles_fila1 = (objeto_1 != "   ") + (objeto_2 != "   ") + (objeto_3 != "   ");
+						int disponibles_fila2 = (objeto_4 != "   ") + (objeto_5 != "   ") + (objeto_6 != "   ") + (objeto_7 != "   ") + (objeto_8 != "   ");
+						int disponibles_fila3 = (objeto_9 != "   ") + (objeto_10 != "   ") + (objeto_11 != "   ") + (objeto_12 != "   ") + (objeto_13 != "   ") + (objeto_14 != "   ") + (objeto_15 != "   ");
+						
+						if (jugador_1 == "" && jugador_2 == "") {
+							cout << "Ingrese nombre para jugador 1: ";
+							cin >> jugador_1;
+							cout << "Ingrese nombre para jugador 2: ";
+							cin >> jugador_2;
+							cout << endl << "Turno de " << jugador_1 << endl;
+						}
+						else {
+							cout << endl << "Turno de " << (turno == 1 ? jugador_1 : jugador_2) << endl;
+						}
+						
+						cout << "Objetos disponibles: " << endl << endl;
+						cout << "         " << objeto_1 << objeto_2 << objeto_3 << "  " << endl;
+						cout << "      " << objeto_4 << objeto_5 << objeto_6 << objeto_7 << objeto_8 << " " << endl;
+						cout << objeto_9 << objeto_10 << objeto_11 << objeto_12 << objeto_13 << objeto_14 << objeto_15 << endl << endl;
+						
+						bool seleccion_valida = false;
+						while (!seleccion_valida) {
+							cout << "De que fila quiere quitar objetos? (1: Primera, 2: Segunda, 3: Tercera): ";
+							cin >> fila;
+							
+							if (fila == 1 && disponibles_fila1 > 0) {
+								cout << "Cuantos objetos quirere retirar (disponible " << disponibles_fila1 << ")? ";
+								cin >> cantidad_objetos;
+								if (cantidad_objetos > 0 && cantidad_objetos <= disponibles_fila1) seleccion_valida = true;
+							}
+							else if (fila == 2 && disponibles_fila2 > 0) {
+								cout << "Cuantos objetos quirere retirar (disponible " << disponibles_fila2 << ")? ";
+								cin >> cantidad_objetos;
+								if (cantidad_objetos > 0 && cantidad_objetos <= disponibles_fila2) seleccion_valida = true;
+							}
+							else if (fila == 3 && disponibles_fila3 > 0) {
+								cout << "Cuantos objetos quirere retirar  (disponible " << disponibles_fila3 << ")? ";
+								cin >> cantidad_objetos;
+								if (cantidad_objetos > 0 && cantidad_objetos <= disponibles_fila3) seleccion_valida = true;
+							}
+							
+							if (!seleccion_valida) {
+								cout << "Cantidad no valida" << endl;
+							}
+						}
+						
+						for (int j = 0; j < cantidad_objetos; j++) {
+							bool objeto_valido = false;
+							while (!objeto_valido) {
+								cout << "Elija un objeto para quitar de la fila " << fila << ": ";
+								cin >> eleccion_objeto;
+								
+								if (fila == 1) {
+									if (eleccion_objeto == 1 && objeto_1 != "   ") { objeto_1 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 2 && objeto_2 != "   ") { objeto_2 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 3 && objeto_3 != "   ") { objeto_3 = "   "; objeto_valido = true; }
+								}
+								else if (fila == 2) {
+									if (eleccion_objeto == 4 && objeto_4 != "   ") { objeto_4 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 5 && objeto_5 != "   ") { objeto_5 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 6 && objeto_6 != "   ") { objeto_6 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 7 && objeto_7 != "   ") { objeto_7 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 8 && objeto_8 != "   ") { objeto_8 = "   "; objeto_valido = true; }
+								}
+								else if (fila == 3) {
+									if (eleccion_objeto == 9 && objeto_9 != "   ") { objeto_9 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 10 && objeto_10 != "   ") { objeto_10 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 11 && objeto_11 != "   ") { objeto_11 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 12 && objeto_12 != "   ") { objeto_12 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 13 && objeto_13 != "   ") { objeto_13 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 14 && objeto_14 != "   ") { objeto_14 = "   "; objeto_valido = true; }
+									else if (eleccion_objeto == 15 && objeto_15 != "   ") { objeto_15 = "   "; objeto_valido = true; }
+								}
+								
+								if (!objeto_valido) {
+									cout << "Objeto no disponible. Intente de nuevo." << endl;
+								}
+							}
+						}
+						
+						if (!hayObjetos(objeto_1, objeto_2, objeto_3, objeto_4, objeto_5, objeto_6, objeto_7, objeto_8,
+										objeto_9, objeto_10, objeto_11, objeto_12, objeto_13, objeto_14, objeto_15)) {
+							cout << "\nEl jugador " << (turno == 1 ? jugador_1 : jugador_2) << " perdio" << endl;
+							if (turno == 1) puntaje_2++;
+							else puntaje_1++;
+							return false; 
+						}
+						
+						turno = (turno == 1) ? 2 : 1;
+					}
+					return true; 
+				}
+				
+				int main() {
+					bool flag = true, controlador_menu;
+					int puntaje_1 = 0, puntaje_2 = 0, turno = 1;
+					
+					string objeto_1 = "[1]", objeto_2 = "[2]", objeto_3 = "[3]", objeto_4 = "[4]";
+					string objeto_5 = "[5]", objeto_6 = "[6]", objeto_7 = "[7]", objeto_8 = "[8]";
+					string objeto_9 = "[9]", objeto_10 = "[10]", objeto_11 = "[11]", objeto_12 = "[12]";
+					string objeto_13 = "[13]", objeto_14 = "[14]", objeto_15 = "[15]";
+					
+					cout << "Bienvenido al juego\n" << endl;
+					
+					do {
+						bool sigue = codigo_principal(turno, puntaje_1, puntaje_2,
+													objeto_1, objeto_2, objeto_3, objeto_4,
+													objeto_5, objeto_6, objeto_7, objeto_8,
+													objeto_9, objeto_10, objeto_11, objeto_12,
+													objeto_13, objeto_14, objeto_15);
+						
+						cout << "\nPuntaje actual:" << endl;
+						cout << "Jugador 1 = " << puntaje_1 << endl;
+						cout << "Jugador 2 = " << puntaje_2 << endl;
+						
+						if (!sigue) break;
+						
+						controlador_menu = menu(flag);
+					} while (controlador_menu == true);
+					
+					return 0;
+				}
+				
